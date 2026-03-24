@@ -6,6 +6,9 @@ import (
 	"os"
 
 	"github.com/golang-migrate/migrate/v4"
+	// Blank import to run init() in the background for src and dest file paths
+	_ "github.com/golang-migrate/migrate/v4/database/clickhouse"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/hongggweiii/market-feed/internal/broker"
 	"github.com/hongggweiii/market-feed/internal/database"
 	"github.com/hongggweiii/market-feed/internal/exchange"
@@ -15,14 +18,14 @@ import (
 
 func main() {
 	err := godotenv.Load()
-    if err != nil 
-        // Not fatal, since production variables not set in Docker/OS
-        log.Println("Error loading .env file, using system env")
+	if err != nil {
+		// Not fatal, since production variables not set in Docker/OS
+		log.Println("Error loading .env file, using system env")
 	}
 
-	const BrokerAddress = os.Getenv("KAFKA_BROKER")
+	var BrokerAddress = os.Getenv("KAFKA_BROKER")
 	const KafkaTopic = "crypto.trades.raw"
-	const ClickHouseAddress = os.Getenv("CLICKHOUSE_ADDR")
+	var ClickHouseAddress = os.Getenv("CLICKHOUSE_ADDR")
 
 	ctx := context.Background()
 	consumer := broker.NewKafkaConsumer(BrokerAddress, KafkaTopic, "trades-clickhouse-ingestor")
@@ -47,7 +50,7 @@ func main() {
 		log.Println("Database successfully migrated!")
 	}
 
-	err := broker.PrepareKafkaTopic(BrokerAddress, KafkaTopic)
+	err = broker.PrepareKafkaTopic(BrokerAddress, KafkaTopic)
 	if err != nil {
 		log.Fatalf("Failed to create Kafka topic: %v", err)
 	}
