@@ -18,11 +18,11 @@ func main() {
     if err != nil 
         // Not fatal, since production variables not set in Docker/OS
         log.Println("Error loading .env file, using system env")
-    
-	
-	const BrokerAddress = "localhost:9092"
+	}
+
+	const BrokerAddress = os.Getenv("KAFKA_BROKER")
 	const KafkaTopic = "crypto.trades.raw"
-	const ClickHouseAddress = "localhost:9000"
+	const ClickHouseAddress = os.Getenv("CLICKHOUSE_ADDR")
 
 	ctx := context.Background()
 	consumer := broker.NewKafkaConsumer(BrokerAddress, KafkaTopic, "trades-clickhouse-ingestor")
