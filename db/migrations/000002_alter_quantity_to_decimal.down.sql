@@ -1,0 +1,1 @@
+ALTER TABLE trades MODIFY COLUMN quantity Float64;
