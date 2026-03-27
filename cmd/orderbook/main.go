@@ -18,4 +18,14 @@ func main() {
 	engine.Seed(snapshot)
 
 	log.Printf("Bids: %d, Asks: %d", len(engine.GetBids()), len(engine.GetAsks()))
+
+	go func() {
+		err := exchange.StreamOrderBookDepthUpdates("BTCUSDT")
+		if err != nil {
+			log.Fatalf("Stream stopped: %v", err)
+		}
+	}()
+
+	select {}
+
 }
