@@ -6,7 +6,6 @@ import (
 
 	"github.com/ClickHouse/clickhouse-go/v2"
 	"github.com/hongggweiii/market-feed/internal/domain"
-	"github.com/shopspring/decimal"
 )
 
 type ClickHouseRepo struct {
@@ -43,17 +42,13 @@ func (repo *ClickHouseRepo) InsertTrades(ctx context.Context, trades []domain.Tr
 	fmt.Printf("Flushing batch of size %d to ClickHouse...", len(trades))
 
 	for i := range trades {
-		// Prevent floating point errors
-		priceDec, _ := decimal.NewFromString(trades[i].Price)
-		qtyDec, _ := decimal.NewFromString(trades[i].Quantity)
-
 		err := batch.Append(
 			trades[i].EventType,
 			trades[i].EventTime,
 			trades[i].Symbol,
 			trades[i].TradeID,
-			priceDec,
-			qtyDec,
+			trades[i].Price,
+			trades[i].Quantity,
 			trades[i].TradeTime,
 			trades[i].IsMarketMaker,
 		)

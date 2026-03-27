@@ -12,14 +12,14 @@ import (
 )
 
 type binanceTradeDTO struct {
-	EventType     string              `json:"e"`
-	EventTime     int64               `json:"E"`
-	Symbol        string              `json:"s"`
-	TradeID       int64               `json:"t"`
-	Price         [][]decimal.Decimal `json:"p"`
-	Quantity      [][]decimal.Decimal `json:"q"`
-	TradeTime     int64               `json:"T"`
-	IsMarketMaker bool                `json:"m"`
+	EventType     string          `json:"e"`
+	EventTime     int64           `json:"E"`
+	Symbol        string          `json:"s"`
+	TradeID       int64           `json:"t"`
+	Price         decimal.Decimal `json:"p"`
+	Quantity      decimal.Decimal `json:"q"`
+	TradeTime     int64           `json:"T"`
+	IsMarketMaker bool            `json:"m"`
 }
 
 type binanceDepthUpdateDTO struct {
