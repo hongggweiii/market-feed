@@ -7,7 +7,14 @@ import (
 	"strings"
 
 	"github.com/hongggweiii/market-feed/internal/domain"
+	"github.com/shopspring/decimal"
 )
+
+type binanceDepthSnapshotDTO struct {
+	LastUpdateID int64               `json:"lastUpdateId"`
+	Bids         [][]decimal.Decimal `json:"bids"`
+	Asks         [][]decimal.Decimal `json:"asks"`
+}
 
 func FetchDepthSnapshot(symbol string) (*domain.DepthSnapshot, error) {
 	const limit = 1000
@@ -22,10 +29,10 @@ func FetchDepthSnapshot(symbol string) (*domain.DepthSnapshot, error) {
 	}
 	defer resp.Body.Close() // Prevent resource leaks
 
-	orderBook := new(domain.DepthSnapshot)
+	dto := new(binanceDepthSnapshotDTO)
 	if resp.StatusCode == http.StatusOK {
 		// io.ReadAll() take sup lots of memory
-		if err := json.NewDecoder(resp.Body).Decode(orderBook); err != nil {
+		if err := json.NewDecoder(resp.Body).Decode(dto); err != nil {
 			return nil, fmt.Errorf("Failed to decode response: %w", err)
 		}
 	} else {
@@ -33,6 +40,13 @@ func FetchDepthSnapshot(symbol string) (*domain.DepthSnapshot, error) {
 
 	}
 
+	// Map DTO to Domain model
+	snapshot := &domain.DepthSnapshot{
+		LastUpdateID: dto.LastUpdateID,
+		Bids:         dto.Bids,
+		Asks:         dto.Asks,
+	}
+
 	fmt.Println("Successful fetch!")
-	return orderBook, nil
+	return snapshot, nil
 }
