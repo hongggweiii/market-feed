@@ -38,7 +38,10 @@ func main() {
 	for {
 		select {
 		case update := <-updates: // Channel receives new data from Websocket
-			engine.ProcessUpdate(update)
+			err := engine.ProcessUpdate(update)
+			if err != nil {
+				log.Fatalf("Fatal sync error: %v", err)
+			}
 		case <-ticker.C: // 1 second passed
 			bestBidPrice, bestBidQty, bestAskPrice, bestAskQty := engine.GetTopBook()
 			log.Printf("Best Bid: %s (%s), Best Ask: %s (%s)", bestBidPrice, bestBidQty, bestAskPrice, bestAskQty)
