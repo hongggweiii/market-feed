@@ -1,4 +1,15 @@
-# Market Feed Ingestor
+# Quant Forge
+
+QuantForge is a comprehensive backend engineering project which serves as a learning laboratory for exploring complex distributed systems, high-throughput data pipelines, and advanced microservice architecture. This project aims to tackle concurrency management, strict state synchronisation, event-driven messaging and high speed inter-service communication.
+
+## The Core Microservices
+
+1. **The Ingestor**
+2. **The Order Book**
+
+---
+
+## Microservice 1: Market Feed Ingestor
 
 A high-throughput data pipeline built in Go. This service streams real-time cryptocurrency trade data from the Binance WebSocket API, buffers the events through Apache Kafka, and utilises an in-memory batching engine to write financial data into a ClickHouse OLAP database.
 
@@ -27,6 +38,10 @@ RUN_MIGRATIONS=true
 KAFKA_BROKER=localhost:9092
 CLICKHOUSE_ADDR=localhost:9000
 ```
+**3. Install Dependencies**
+```bash
+go mod tidy
+```
 
 ## Running the Infrastructure
 Start local Docker Compose:
@@ -50,4 +65,34 @@ go run cmd/ingestor/main.go
 ## Accessing ClickHouse terminal
 ```bash
 docker exec -it clickhouse-db clickhouse-client
+```
+
+---
+
+## Microservice 2: Order Book Engine
+
+A highly performant, concurrency-safe, real-time order book replica built in Go. This service connects to the Binance WebSocket and REST APIs to maintain a mathematically accurate, millisecond-level state of the market depth for BTCUSDT.
+
+## Architecture Overview
+
+1. **Websocket Buffer:** Spawns a background Goroutine to connect to Binance's Websocket, buffering live depth trades.
+2. **REST Snapshot Seeding:** Fetch a massive depth snapshot via HTTP REST, seeding the initial `bids` and `asks` maps
+3. **Sequence Sync Engine:** Stitches the stream to the snapshot. It drops obsolete packets, identifies the exact overlap point, and enforces strict sequence continuity.
+4. **Concurrency-Safe Memory:** Utilises Go maps protected by `sync.RWMutex` to safely process thousands of bid and ask insertions/deletions per second without race conditions.
+
+## Setup & Configuration
+
+**1. Clone the repository**
+```bash
+git clone [https://github.com/yourusername/market-feed.git](https://github.com/yourusername/market-feed.git)
+cd market-feed
+```
+**2. Install Dependencies**
+```bash
+go mod tidy
+```
+
+## Running Application
+```bash
+go run cmd/ingestor/main.go
 ```
