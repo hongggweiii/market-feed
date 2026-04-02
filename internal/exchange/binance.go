@@ -41,6 +41,10 @@ type binanceDepthUpdateDTO struct {
 	Asks          [][]decimal.Decimal `json:"a"`
 }
 
+func (c *BinanceClient) Name() string {
+	return "Binance"
+}
+
 // StreamBinanceTrades streams trades for a given symbol and publishes them to the provided Kafka producer
 func (c *BinanceClient) StreamBinanceTrades(symbol string, broker *broker.KafkaProducer) error {
 	baseUrl := "wss://stream.binance.com:9443/ws"

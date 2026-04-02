@@ -44,17 +44,17 @@ func RunOrderBook(api orderbook.DepthProvider, symbol string) {
 			}
 		case <-ticker.C: // 1 second passed
 			bestBidPrice, bestBidQty, bestAskPrice, bestAskQty := engine.GetTopBook()
-			log.Printf("Best Bid: %s (%s), Best Ask: %s (%s)", bestBidPrice, bestBidQty, bestAskPrice, bestAskQty)
+			log.Printf("[%s] Best Bid: %s (%s), Best Ask: %s (%s)", api.Name(), bestBidPrice, bestBidQty, bestAskPrice, bestAskQty)
 		}
 	}
 }
 
 func main() {
-	// binanceAPI := &exchange.BinanceClient{}
-	coinbaseAPI := &exchange.CoinbaseClient{}
+	binanceAPI := &exchange.BinanceClient{}
+	bybitAPI := &exchange.ByBitClient{}
 
-	log.Println("Starting order book...")
-	// RunOrderBook(binanceAPI, "BTCUSDT")
-	RunOrderBook(coinbaseAPI, "BTC-USD")
+	go RunOrderBook(binanceAPI, "BTCUSDT")
+	go RunOrderBook(bybitAPI, "BTCUSDT")
 
+	select {}
 }

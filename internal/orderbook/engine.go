@@ -12,6 +12,7 @@ import (
 
 // Order Book interface
 type DepthProvider interface {
+	Name() string
 	StreamOrderBookDepthUpdates(symbol string, updates chan<- *domain.DepthUpdate) error
 	FetchDepthSnapshot(symbol string) (*domain.DepthSnapshot, error)
 }
