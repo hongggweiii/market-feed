@@ -5,10 +5,10 @@ import (
 	"net"
 	"time"
 
-	orderbookpb "github.com/hongggweiii/market-feed/api/proto"
-	"github.com/hongggweiii/market-feed/internal/domain"
-	"github.com/hongggweiii/market-feed/internal/exchange"
-	"github.com/hongggweiii/market-feed/internal/orderbook"
+	orderbookpb "github.com/hongggweiii/market-nodes/api/proto"
+	"github.com/hongggweiii/market-nodes/internal/domain"
+	"github.com/hongggweiii/market-nodes/internal/exchange"
+	"github.com/hongggweiii/market-nodes/internal/orderbook"
 	"google.golang.org/grpc"
 )
 
@@ -46,7 +46,7 @@ func RunOrderBook(api orderbook.DepthProvider, symbol string, port string) {
 		grpcServer := grpc.NewServer()
 		myServer := orderbook.NewGrpcServer(engine)
 
-		// Regster the gRPC server
+		// Register the gRPC server
 		orderbookpb.RegisterOrderBookServiceServer(grpcServer, myServer)
 
 		log.Printf("[%s] gRPC server started on port %s", api.Name(), port)

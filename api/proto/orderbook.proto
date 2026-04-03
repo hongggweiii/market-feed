@@ -3,7 +3,7 @@ syntax = "proto3";
 package orderbook;
 
 // Tell compiler where to put generated Go code
-option go_package = "github.com/hongggweiii/market-feed/api/proto/orderbookpb";
+option go_package = "github.com/hongggweiii/market-nodes/api/proto/orderbookpb";
 
 // Services: functions that Arbitrage Detector can call
 service OrderBookService {

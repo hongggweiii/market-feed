@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/hongggweiii/market-feed/internal/domain"
+	"github.com/hongggweiii/market-nodes/internal/domain"
 	"github.com/segmentio/kafka-go"
 )
 

@@ -6,7 +6,7 @@ import (
 	"slices"
 	"sync"
 
-	"github.com/hongggweiii/market-feed/internal/domain"
+	"github.com/hongggweiii/market-nodes/internal/domain"
 	"github.com/shopspring/decimal"
 )
 

@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"github.com/gorilla/websocket"
-	"github.com/hongggweiii/market-feed/internal/domain"
-	"github.com/hongggweiii/market-feed/internal/ingestor/broker"
+	"github.com/hongggweiii/market-nodes/internal/domain"
+	"github.com/hongggweiii/market-nodes/internal/ingestor/broker"
 	"github.com/shopspring/decimal"
 )
 

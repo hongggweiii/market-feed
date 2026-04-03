@@ -160,7 +160,7 @@ const file_api_proto_orderbook_proto_rawDesc = "" +
 	"\fbest_ask_qty\x18\x05 \x01(\tR\n" +
 	"bestAskQty2_\n" +
 	"\x10OrderBookService\x12K\n" +
-	"\fGetOrderBook\x12\x1c.orderbook.GetTopBookRequest\x1a\x1d.orderbook.GetTopBookResponseB:Z8github.com/hongggweiii/market-feed/api/proto/orderbookpbb\x06proto3"
+	"\fGetOrderBook\x12\x1c.orderbook.GetTopBookRequest\x1a\x1d.orderbook.GetTopBookResponseB;Z9github.com/hongggweiii/market-nodes/api/proto/orderbookpbb\x06proto3"
 
 var (
 	file_api_proto_orderbook_proto_rawDescOnce sync.Once

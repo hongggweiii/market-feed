@@ -1,4 +1,4 @@
-# Quant Forge
+# Market Nodes
 
 QuantForge is a comprehensive backend engineering project which serves as a learning laboratory for exploring complex distributed systems, high-throughput data pipelines, and advanced microservice architecture. This project aims to tackle concurrency management, strict state synchronisation, event-driven messaging and high speed inter-service communication.
 

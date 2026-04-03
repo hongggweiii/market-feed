@@ -1,4 +1,4 @@
-module github.com/hongggweiii/market-feed
+module github.com/hongggweiii/market-nodes
 
 go 1.26.1
 

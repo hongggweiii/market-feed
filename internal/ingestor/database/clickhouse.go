@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/ClickHouse/clickhouse-go/v2"
-	"github.com/hongggweiii/market-feed/internal/domain"
+	"github.com/hongggweiii/market-nodes/internal/domain"
 )
 
 type ClickHouseRepo struct {
