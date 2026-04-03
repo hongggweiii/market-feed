@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package orderbook;
+
+// Tell compiler where to put generated Go code
+option go_package = "github.com/hongggweiii/market-feed/api/proto/orderbookpb";
+
+// Services: functions that Arbitrage Detector can call
+service OrderBookService {
+    // Returns absolute best bid and ask for a given symbol
+  rpc GetOrderBook (GetTopBookRequest) returns (GetTopBookResponse);
+}
+
+// Messages: exact data structures for requests and responses
+// Arbitrage Detector requests from Order Book
+message GetTopBookRequest {
+    string symbol = 1; // e.g., "BTC-USD"
+}
+
+// Order Book responses to Arbitrage Detector
+message GetTopBookResponse {
+    string symbol = 1;         
+    string best_bid_price = 2;
+    string best_bid_qty = 3;   
+    string best_ask_price = 4; 
+    string best_ask_qty = 5;
+}

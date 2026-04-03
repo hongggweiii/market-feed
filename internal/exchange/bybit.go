@@ -55,7 +55,7 @@ func (c *ByBitClient) StreamOrderBookDepthUpdates(symbol string, updates chan<- 
 		return err
 	}
 
-	fmt.Printf("[ByBit] Connected and subscribed to %s", symbol)
+	fmt.Printf("[ByBit] Connected and subscribed to %s\n", symbol)
 
 	// Infinite loop for Websocket
 	for {

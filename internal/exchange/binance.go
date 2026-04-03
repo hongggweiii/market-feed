@@ -127,7 +127,6 @@ func (c *BinanceClient) FetchDepthSnapshot(symbol string) (*domain.DepthSnapshot
 		Asks:         dto.Asks,
 	}
 
-	fmt.Println("Successful fetch!")
 	return snapshot, nil
 }
 
@@ -145,7 +144,7 @@ func (c *BinanceClient) StreamOrderBookDepthUpdates(symbol string, updates chan<
 	}
 	defer conn.Close()
 
-	fmt.Printf("[Binance] Connected and subscribed to %s", symbol)
+	fmt.Printf("[Binance] Connected and subscribed to %s\n", symbol)
 
 	// Infinite loop for Websocket
 	for {
