@@ -1,6 +1,6 @@
-# Market Nodes
+# MarketNodes
 
-QuantForge is a comprehensive backend engineering project which serves as a learning laboratory for exploring complex distributed systems, high-throughput data pipelines, and advanced microservice architecture. This project aims to tackle concurrency management, strict state synchronisation, event-driven messaging and high speed inter-service communication.
+Market Nodes is a comprehensive backend engineering project which serves as a learning laboratory for exploring complex distributed systems, high-throughput data pipelines, and advanced microservice architecture. This project aims to tackle concurrency management, strict state synchronisation, event-driven messaging and high speed inter-service communication.
 
 ## The Core Microservices
 
@@ -24,8 +24,8 @@ A high-throughput data pipeline built in Go. This service streams real-time cryp
 
 **1. Clone the repository**
 ```bash
-git clone [https://github.com/yourusername/market-feed.git](https://github.com/yourusername/market-feed.git)
-cd market-feed
+git clone [https://github.com/yourusername/market-nodes.git](https://github.com/yourusername/market-nodes.git)
+cd market-nodes
 ```
 **2. Configure Env Variables**
 Create a .env file from .env.example
@@ -84,8 +84,8 @@ A highly performant, concurrency-safe, real-time order book replica built in Go.
 
 **1. Clone the repository**
 ```bash
-git clone [https://github.com/yourusername/market-feed.git](https://github.com/yourusername/market-feed.git)
-cd market-feed
+git clone [https://github.com/yourusername/market-nodes.git](https://github.com/yourusername/market-nodes.git)
+cd market-nodes
 ```
 **2. Install Dependencies**
 ```bash
@@ -94,5 +94,5 @@ go mod tidy
 
 ## Running Application
 ```bash
-go run cmd/ingestor/main.go
+go run cmd/orderbook/main.go
 ```
